@@ -1,0 +1,97 @@
+﻿<process name="Retrieve Data " version="1.0" bpversion="6.9.0.26970" narrative="AddressBook automation&#xD;&#xA;" byrefcollection="true" type="object" runmode="Exclusive" preferredid="b6c9d5e5-a010-42ae-84a4-4837c25a6a5d">
+  <appdef>
+    <element name="Application Root">
+      <id>91047328-8525-4afd-ada7-0c30669a76ec</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="ac345171-a96c-49b7-a7cd-865ea970a2b9" name="Retrieve Data " type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="6378e4bb-6299-46ae-8fd0-93af612fa189" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-195" />
+    <onsuccess>1058716c-cda3-4c53-b5fc-96f4d69fa1db</onsuccess>
+  </stage>
+  <stage stageid="ad8cb07b-1bb4-4658-af50-f32b31013e98" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="120" />
+  </stage>
+  <stage stageid="1058716c-cda3-4c53-b5fc-96f4d69fa1db" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-90" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(localdb)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookRpa&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>6dbe8cd5-f506-4735-a3bf-1edcfdede2b2</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="6dbe8cd5-f506-4735-a3bf-1edcfdede2b2" name="Retrieve Data" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="0" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;select * from [AddressBookRpa].[dbo].[Details]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results" />
+    </outputs>
+    <onsuccess>ad8cb07b-1bb4-4658-af50-f32b31013e98</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="3398bb98-eaf2-4bcb-809f-d0e677846882" name="Results" type="Collection">
+    <display x="240" y="0" />
+    <datatype>collection</datatype>
+    <alwaysinit />
+    <collectioninfo>
+      <field name="FirstName" type="text" />
+      <field name="LastName" type="text" />
+      <field name="Address" type="text" />
+      <field name="City" type="text" />
+      <field name="State" type="text" />
+      <field name="Zip" type="text" />
+      <field name="PhoneNumber" type="text" />
+      <field name="Email" type="text" />
+    </collectioninfo>
+    <initialvalue>
+      <row>
+        <field name="FirstName" type="text" value="" />
+        <field name="LastName" type="text" value="" />
+        <field name="Address" type="text" value="" />
+        <field name="City" type="text" value="" />
+        <field name="State" type="text" value="" />
+        <field name="Zip" type="text" value="" />
+        <field name="PhoneNumber" type="text" value="" />
+        <field name="Email" type="text" value="" />
+      </row>
+    </initialvalue>
+  </stage>
+  <stage stageid="fd5f8cea-8514-4686-98bf-a859683dc264" name="Message" type="Data">
+    <display x="90" y="0" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1d665ede-2776-4123-a9b5-dce311fb8a3d" name="Success" type="Data">
+    <display x="150" y="0" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+</process>

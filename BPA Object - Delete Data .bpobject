@@ -1,0 +1,85 @@
+﻿<process name="Delete Data " version="1.0" bpversion="6.9.0.26970" narrative="AddressBook automation&#xD;&#xA;" byrefcollection="true" type="object" runmode="Exclusive" preferredid="b6c9d5e5-a010-42ae-84a4-4837c25a6a5d">
+  <appdef>
+    <element name="Application Root">
+      <id>91047328-8525-4afd-ada7-0c30669a76ec</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="d8379d1d-4e20-4725-bf50-38141ff68fcd" name="Delete Data " type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="8d34de36-107b-4a2b-95d0-a46f09d44eb0" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-105" />
+    <onsuccess>ec4a6413-05a7-472e-94a8-125397bf0d21</onsuccess>
+  </stage>
+  <stage stageid="36f574db-1827-47fd-bc61-dec422e0276b" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="150" />
+  </stage>
+  <stage stageid="ec4a6413-05a7-472e-94a8-125397bf0d21" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-15" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(localdb)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookRpa&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>9be38563-8f59-4ed7-a42c-e1af14374c5a</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="9be38563-8f59-4ed7-a42c-e1af14374c5a" name="Delete data using name" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="75" />
+    <inputs>
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;delete from [AddressBookRpa].[dbo].[Details]&#xA;where &#xA;[First Name] = '&quot;&amp;[First Name]&amp;&quot;'&#xA;AND &#xA;[Last Name] = '&quot;&amp;[Last Name]&amp;&quot;'&#xA; ; &quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message" />
+    </outputs>
+    <onsuccess>36f574db-1827-47fd-bc61-dec422e0276b</onsuccess>
+    <resource object="Data - SQL Server" action="Execute" />
+  </stage>
+  <stage stageid="4615c040-d7b1-46e4-8732-90dc7830da3b" name="First Name" type="Data">
+    <loginhibit />
+    <display x="180" y="-105" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Lokendra</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="ca73d7bd-1450-4a97-a8a9-935a3e3e4253" name="Last Name" type="Data">
+    <loginhibit />
+    <display x="255" y="-105" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Yeddula</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="193d7266-2cd5-4336-9a22-480b0dea94ff" name="Success" type="Data">
+    <display x="180" y="75" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="ee38877f-f805-4285-97ce-a370c065e292" name="Message" type="Data">
+    <display x="270" y="75" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+</process>

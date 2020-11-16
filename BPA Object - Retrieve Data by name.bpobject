@@ -1,0 +1,76 @@
+﻿<process name="Retrieve Data by name" version="1.0" bpversion="6.9.0.26970" narrative="AddressBook automation&#xD;&#xA;" byrefcollection="true" type="object" runmode="Exclusive" preferredid="b6c9d5e5-a010-42ae-84a4-4837c25a6a5d">
+  <appdef>
+    <element name="Application Root">
+      <id>91047328-8525-4afd-ada7-0c30669a76ec</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="bebdca5e-75de-4fe9-a906-f7534ebc2c45" name="Retrieve Data by name" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="bef9b5b6-c41b-4a89-bb00-18472a8eeb8f" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-135" />
+    <onsuccess>85f40330-7a2f-4b3a-8229-4cdb4c8ef0dc</onsuccess>
+  </stage>
+  <stage stageid="be5dd7d9-6076-41d7-892d-70f61f25a74b" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="521e678a-d7f7-46ac-b872-62eb69e4a661" name="Retrieve Data" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="15" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;select [First Name] from [AddressBookDB].[dbo].[AddressBook]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results2" />
+    </outputs>
+    <onsuccess>be5dd7d9-6076-41d7-892d-70f61f25a74b</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="85f40330-7a2f-4b3a-8229-4cdb4c8ef0dc" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(localdb)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookDB&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>521e678a-d7f7-46ac-b872-62eb69e4a661</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="81e31061-0778-45fb-8a4f-e3c43a6959ac" name="Success" type="Data">
+    <display x="255" y="15" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="c719f21e-1780-464a-8450-93cd8fb45569" name="Message" type="Data">
+    <display x="165" y="15" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="07684f57-75bf-4224-ba08-562f399d9297" name="Results2" type="Collection">
+    <display x="345" y="15" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+</process>

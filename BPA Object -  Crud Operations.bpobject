@@ -1,0 +1,124 @@
+﻿<process name=" Crud Operations" version="1.0" bpversion="6.9.0.26970" narrative="AddressBook automation&#xD;&#xA;" byrefcollection="true" type="object" runmode="Exclusive" preferredid="b6c9d5e5-a010-42ae-84a4-4837c25a6a5d">
+  <appdef>
+    <element name="Application Root">
+      <id>91047328-8525-4afd-ada7-0c30669a76ec</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="a9b302f8-def8-4b1f-b451-ba6513b76547" name=" Crud Operations" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="b9718d9e-29b6-46cf-ba85-c5a57ff2ab54" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-150" />
+    <onsuccess>10eb2389-1661-47d0-a088-645dc30bda99</onsuccess>
+  </stage>
+  <stage stageid="27caba02-149a-4558-82c9-ebcb8efb7370" name="End" type="End">
+    <loginhibit />
+    <display x="420" y="15" />
+  </stage>
+  <stage stageid="10eb2389-1661-47d0-a088-645dc30bda99" name="Choice1" type="ChoiceStart">
+    <loginhibit />
+    <display x="15" y="-105" />
+    <groupid>899dc613-625c-4cdb-a304-7945811f4a49</groupid>
+    <choices>
+      <choice expression="[Input Choice] = 1">
+        <name>Insert Data</name>
+        <distance>40.7142868</distance>
+        <ontrue>1db27af9-1deb-4ebc-900a-3ca76a7911fb</ontrue>
+      </choice>
+      <choice expression="[Input Choice] = 2">
+        <name>Delete Data</name>
+        <distance>90</distance>
+        <ontrue>491b113a-d3d0-4c83-b4fe-7be7e9cf7746</ontrue>
+      </choice>
+      <choice expression="[Input Choice] = 3">
+        <name>Retrieve Data</name>
+        <distance>150</distance>
+        <ontrue>c2b719ad-20ee-480e-82ec-35cf53a568c4</ontrue>
+      </choice>
+      <choice expression="[Input Choice] = 4">
+        <name>Check Duplicate Data and Add</name>
+        <distance>210</distance>
+        <ontrue>d176cdfa-64b6-4a5e-8c99-b35b8299dd9a</ontrue>
+      </choice>
+      <choice expression="[Input Choice] = 5">
+        <name>Retrieve Data by name</name>
+        <distance>285</distance>
+        <ontrue>9a2a8b94-36ee-45d5-ba5e-2523c560aa31</ontrue>
+      </choice>
+      <choice expression="[Input Choice] = 6">
+        <name>Invalid</name>
+        <distance>390</distance>
+        <ontrue>cff5ac0c-d9c3-45ec-bda6-72e56ddf2727</ontrue>
+      </choice>
+    </choices>
+  </stage>
+  <stage stageid="9ec62c8a-d582-4d9d-b06f-14eeee969fb9" name="Otherwise1" type="ChoiceEnd">
+    <loginhibit />
+    <display x="15" y="390" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <groupid>899dc613-625c-4cdb-a304-7945811f4a49</groupid>
+  </stage>
+  <stage stageid="1db27af9-1deb-4ebc-900a-3ca76a7911fb" name="Add data " type="SubSheet">
+    <loginhibit />
+    <display x="150" y="-60" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <processid>e5bb3667-3799-46c9-8ab1-10bdfbc1608a</processid>
+  </stage>
+  <stage stageid="491b113a-d3d0-4c83-b4fe-7be7e9cf7746" name="Delete Data " type="SubSheet">
+    <loginhibit />
+    <display x="150" y="-15" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <processid>0c3d8c6e-1363-4ff9-8a1e-6e0f02054b91</processid>
+  </stage>
+  <stage stageid="c2b719ad-20ee-480e-82ec-35cf53a568c4" name="Retrieve Data " type="SubSheet">
+    <loginhibit />
+    <display x="150" y="45" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <processid>0da2743a-2b13-4705-ac65-e504ab51f400</processid>
+  </stage>
+  <stage stageid="67228ecd-73f7-400b-872b-a9d8f6b873a7" name="Message" type="Data">
+    <display x="225" y="255" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="b92c64e3-2f1d-468f-bf79-93c86d0ff74e" name="Input Choice" type="Data">
+    <loginhibit />
+    <display x="180" y="-135" />
+    <datatype>number</datatype>
+    <initialvalue>3</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="cff5ac0c-d9c3-45ec-bda6-72e56ddf2727" name="Calc1" type="Calculation">
+    <loginhibit />
+    <display x="75" y="255" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <calculation expression="&quot;Invalid&quot;" stage="Message" />
+  </stage>
+  <stage stageid="d176cdfa-64b6-4a5e-8c99-b35b8299dd9a" name="CheckDuplicate Entry and Insert" type="SubSheet">
+    <loginhibit />
+    <display x="150" y="105" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <processid>acaffcd3-0487-4787-be6a-fdf8b4cfce3f</processid>
+  </stage>
+  <stage stageid="9a2a8b94-36ee-45d5-ba5e-2523c560aa31" name="Retrieve Data by name" type="SubSheet">
+    <loginhibit />
+    <display x="150" y="180" />
+    <onsuccess>27caba02-149a-4558-82c9-ebcb8efb7370</onsuccess>
+    <processid>9f436b52-33e5-4987-9200-8990756e8112</processid>
+  </stage>
+</process>
